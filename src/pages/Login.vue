@@ -29,23 +29,25 @@ export default {
   methods: {
     onSubmit() {
       this.$axios({
-        url:"http://localhost:8899/admin/account/login",
-        method:"POST",
-        data:this.form
-      }).then(res =>{
+        url: "http://localhost:8899/admin/account/login",
+        method: "POST",
+        // 由于在8080端口下去请求8899端口，涉及到跨域
+        withCredentials: true,
+        data: this.form
+      }).then(res => {
         // es6结构数组
-        var {status,message} = res.data
+        var { status, message } = res.data;
 
-        if(status == 1){
+        if (status == 1) {
           // 登录失败
           // 使用elementui的弹窗
           // alert(message)
-          this.$message.error(message)
-        }else{
+          this.$message.error(message);
+        } else {
           // 登录成功
-          this.$router.push("./admin")
+          this.$router.push("./admin");
         }
-      })
+      });
     },
     onRest() {
       this.form = {

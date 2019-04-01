@@ -18,6 +18,7 @@ import VueRouter from "vue-router";
 // 引入组件
 import Login from "./pages/Login.vue";
 import Admin from "./pages/Admin.vue";
+import UserList from "./pages/UserList.vue";
 import GoodsList from "./pages/GoodsList.vue";
 import CategroyList from "./pages/CategroyList.vue";
 
@@ -29,6 +30,8 @@ Vue.use(VueRouter);
 
 // 2.把axios绑定到vue实例的属性$axios
 Vue.prototype.$axios = axios;
+// 设置axios的基础url
+axios.defaults.baseURL = "http://localhost:8899";
 
 // 路由配置
 const routes = [
@@ -41,7 +44,8 @@ const routes = [
     meta: "管理后台",
     children: [
       { path: "goods-list", component: GoodsList, meta: "商品列表" },
-      { path: "category-list", component: CategroyList, meta: "栏目列表" }
+      { path: "category-list", component: CategroyList, meta: "栏目列表" },
+      { path: "user-list", component: UserList, meta: "会员列表" }
     ]
   }
 ]
