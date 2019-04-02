@@ -2,12 +2,12 @@
   <div>
     <el-row type="flex" justify="space-between" align="middle" style="margin-bottom:20px">
       <div>
-        <el-button>新增</el-button>
+        <el-button @click="goodsAdd">新增</el-button>
         <el-button type="danger" @click="handleDeletes">删除</el-button>
       </div>
       <el-col :span="8">
-        <el-input placeholder="请输入内容" class="input-with-select" v-model="searchvalue">
-          <el-button slot="append" icon="el-icon-search" @click = "handleSearch"></el-button>
+        <el-input placeholder="请输入内容" class="input-with-select" v-model="searchvalueCache">
+          <el-button slot="append" icon="el-icon-search" @click="handleSearch"></el-button>
         </el-input>
       </el-col>
     </el-row>
@@ -66,6 +66,7 @@ export default {
       pageIndex: 1,
       pageSize: 3,
       searchvalue: "",
+      searchvalueCache: "",
       total: 0,
       multipleSelection: [],
       ids: []
@@ -136,15 +137,18 @@ export default {
       });
     },
     // 编辑
-    handleEdit(index, row) {},
+    handleEdit(index, row) {
+      // 跳转到编辑页，并且带上id
+      this.$router.push(`/admin/goods-edit/${row.id}`);
+    },
 
     // 删除多个
     handleDeletes() {
-      console.log(Boolean(this.ids))
+      console.log(Boolean(this.ids));
       if (this.ids.length == 0) {
         this.$message({
           showClose: true,
-          message:"请您选择要删除的数据",
+          message: "请您选择要删除的数据",
           type: "error"
         });
         return;
@@ -167,15 +171,21 @@ export default {
       });
     },
     // 搜索按钮
-    handleSearch(){
-      if(!this.searchvalue){
+    handleSearch() {
+      if (!this.searchvalueCache) {
         this.$message({
           showClose: true,
-          message:"请您输入搜索关键字",
+          message: "请您输入搜索关键字",
           type: "error"
         });
         return;
       }
+      this.searchvalue = this.searchvalueCache;
+      // 需要将初始页数设置为1，否者，当你浏览到第四页在进行搜索时，
+      // 点击搜索发送的ajax请求的参数为pageIndex=4,pageSize=3，searchvalue = "xxx"，
+      // 若是数据库里面没有符合参数的第四页数据，则会请求不到数据
+      // 所以要将pageIndex设置为1
+      this.pageIndex = 1;
       this.getList();
     },
 
@@ -191,6 +201,9 @@ export default {
     handleCurrentChange(val) {
       this.pageIndex = val;
       this.getList();
+    },
+    goodsAdd() {
+      this.$router.push("/admin/goods-add");
     }
   }
 };

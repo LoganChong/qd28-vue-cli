@@ -19,8 +19,11 @@ import VueRouter from "vue-router";
 import Login from "./pages/Login.vue";
 import Admin from "./pages/Admin.vue";
 import UserList from "./pages/UserList.vue";
+import GoodsAdd from "./pages/GoodsAdd.vue";
+import GoodsEdit from "./pages/GoodsEdit.vue";
 import GoodsList from "./pages/GoodsList.vue";
 import CategroyList from "./pages/CategroyList.vue";
+
 
 // 3.全局注册组件
 Vue.use(ElementUI);
@@ -44,6 +47,8 @@ const routes = [
     meta: "管理后台",
     children: [
       { path: "goods-list", component: GoodsList, meta: "商品列表" },
+      { path: "goods-add", component: GoodsAdd, meta: "新增商品" },
+      { path: "goods-edit/:id", component: GoodsEdit, meta: "编辑商品" },
       { path: "category-list", component: CategroyList, meta: "栏目列表" },
       { path: "user-list", component: UserList, meta: "会员列表" }
     ]
