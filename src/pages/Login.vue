@@ -46,6 +46,14 @@ export default {
         } else {
           // 登录成功
           this.$router.push("./admin");
+
+          // 修改vuex中user的值
+          // 调用setUser方法修改user的值，并且需要传递一个用户对象
+          // this.$store.commit调用mutations里面的方法
+          this.$store.commit("setUser", {
+            uname: message.uname,
+            realname: message.realname
+          });
         }
       });
     },

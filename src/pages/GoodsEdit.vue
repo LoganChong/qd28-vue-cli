@@ -141,7 +141,7 @@ export default {
         withCredentials: true
       }).then(res => {
         var { status, message } = res.data;
-        console.log(res);
+        // console.log(res);
         if (status == 0) {
           this.$message({
             showClose: true,
@@ -209,14 +209,12 @@ export default {
       }
     });
     const id = this.$route.params.id;
-    console.log(id);
     this.$axios({
       url: `/admin/goods/getgoodsmodel/${id}`,
       method: "GET",
       // 由于在8080端口下去请求8899端口，涉及到跨域
       withCredentials: true
     }).then(res => {
-      console.log(res);
       const { message, status } = res.data;
       if (status == 0) {
         this.form = message;

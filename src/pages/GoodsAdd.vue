@@ -140,7 +140,7 @@ export default {
         withCredentials: true
       }).then(res => {
         var { status, message } = res.data;
-        console.log(res);
+        // console.log(res);
         if (status == 0) {
           this.$message({
             showClose: true,
@@ -179,11 +179,11 @@ export default {
     // 删除图片后的回调函数
     handleRemove(file, fileList) {
       // fileList每一项的respone的属性才是 { name:xxx, shotUrl: xxx, url:
-      console.log(file, fileList);
+      // console.log(file, fileList);
       this.form.fileList = fileList.map(v => {
         return v.response;
       });
-      console.log(this.form.fileList);
+      // console.log(this.form.fileList);
     },
     // 预览图片
     handlePictureCardPreview(file) {

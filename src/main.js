@@ -22,8 +22,11 @@ import UserList from "./pages/UserList.vue";
 import GoodsAdd from "./pages/GoodsAdd.vue";
 import GoodsEdit from "./pages/GoodsEdit.vue";
 import GoodsList from "./pages/GoodsList.vue";
-import CategroyList from "./pages/CategroyList.vue";
+import CategoryList from "./pages/CategoryList.vue";
+import CategoryAdd from "./pages/CategoryAdd.vue";
 
+// vuex// 1.导入vuex的store
+import store from "./store";
 
 // 3.全局注册组件
 Vue.use(ElementUI);
@@ -49,7 +52,8 @@ const routes = [
       { path: "goods-list", component: GoodsList, meta: "商品列表" },
       { path: "goods-add", component: GoodsAdd, meta: "新增商品" },
       { path: "goods-edit/:id", component: GoodsEdit, meta: "编辑商品" },
-      { path: "category-list", component: CategroyList, meta: "栏目列表" },
+      { path: "category-list", component: CategoryList, meta: "栏目列表" },
+      { path: "category-add", component: CategoryAdd, meta: "新增栏目" },
       { path: "user-list", component: UserList, meta: "会员列表" }
     ]
   }
@@ -60,6 +64,7 @@ const router = new VueRouter({
 })
 
 new Vue({
+  store,
   // 挂载路由到根实例
   router,
   render: h => h(App),

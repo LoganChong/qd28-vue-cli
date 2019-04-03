@@ -144,7 +144,7 @@ export default {
 
     // 删除多个
     handleDeletes() {
-      console.log(Boolean(this.ids));
+      // console.log(Boolean(this.ids));
       if (this.ids.length == 0) {
         this.$message({
           showClose: true,
